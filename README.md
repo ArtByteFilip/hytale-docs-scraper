@@ -18,7 +18,14 @@ This tool is designed for developers who want to build third-party tools, plugin
 1. **Scraping**: The `scraper.py` script crawls the official Hytale documentation site, following package and class links to gather Javadoc content.
 2. **Parsing**: HTML content is parsed using `BeautifulSoup4` to extract structured data including signatures, descriptions, and Javadoc tags (@param, @return).
 3. **Storage**: Data is stored in a structured JSONL format along with a manifest file containing metadata about the scrape session.
-4. **Processing**: Users can then use `json_to_md.py` to generate human-readable documentation or `api_extractor.py` to sync with local decompiled source code.
+4. **Processing**: Users can then use `json_to_md.py` to generate human-readable documentation.
+5. **API Extraction (Optional)**: If you possess the `HytaleServer.jar`, you can use a Java decompiler (like [CFR](https://www.benf.org/other/cfr/)) to extract the source code. The `api_extractor.py` then processes these files to create a clean API overview.
+
+### Decompilation Workflow
+To use the `api_extractor.py`, you first need to decompile the server JAR:
+1. Download `cfr.jar`.
+2. Run decompiler: `java -jar cfr.jar HytaleServer.jar --outputdir ./decompiled`
+3. Extract API: `python api_extractor.py ./decompiled output_api.txt`
 
 ## Requirements
 
